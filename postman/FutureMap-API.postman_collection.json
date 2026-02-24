@@ -1,0 +1,533 @@
+{
+  "info": {
+    "name": "FutureMap API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Budi Mahasiswa\",\n    \"email\": \"budi@student.com\",\n    \"password\": \"password123\",\n    \"password_confirmation\": \"password123\",\n    \"role\": \"mahasiswa\",\n    \"nim\": \"2021001\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/register",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"budi@student.com\",\n    \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/user",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "user"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/logout",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Jobs",
+      "item": [
+        {
+          "name": "Get All Jobs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/jobs?page=1&per_page=10&sort=latest",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "jobs"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "10"
+                },
+                {
+                  "key": "sort",
+                  "value": "latest"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Jobs with Filters",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/jobs?type=fulltime&work_style=remote&min_salary=5000000&sort=salary_high",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "jobs"],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "fulltime"
+                },
+                {
+                  "key": "work_style",
+                  "value": "remote"
+                },
+                {
+                  "key": "min_salary",
+                  "value": "5000000"
+                },
+                {
+                  "key": "sort",
+                  "value": "salary_high"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Job Detail",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/jobs/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "jobs", "1"]
+            }
+          }
+        },
+        {
+          "name": "Apply for Job",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "cv",
+                  "type": "file",
+                  "src": "/path/to/cv.pdf"
+                },
+                {
+                  "key": "cover_letter",
+                  "value": "Saya sangat tertarik dengan posisi ini karena..."
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/jobs/1/apply",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "jobs", "1", "apply"]
+            }
+          }
+        },
+        {
+          "name": "Get Job Recommendations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/jobs/recommendations",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "jobs", "recommendations"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "Get All Events",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/events?type=webinar&sort=upcoming",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "events"],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "webinar"
+                },
+                {
+                  "key": "sort",
+                  "value": "upcoming"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Event Detail",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/events/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "events", "1"]
+            }
+          }
+        },
+        {
+          "name": "Register for Event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/events/1/register",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "events", "1", "register"]
+            }
+          }
+        },
+        {
+          "name": "My Events",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/my-events",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "my-events"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Scholarships",
+      "item": [
+        {
+          "name": "Get All Scholarships",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/scholarships?type=academic&level=undergraduate&sort=deadline",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scholarships"],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "academic"
+                },
+                {
+                  "key": "level",
+                  "value": "undergraduate"
+                },
+                {
+                  "key": "sort",
+                  "value": "deadline"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Scholarship Detail",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/scholarships/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scholarships", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Scholarship Stats",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/scholarships/stats",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scholarships", "stats"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Career Paths",
+      "item": [
+        {
+          "name": "Get All Career Paths",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/career-paths?industry=Technology&sort=popular",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "career-paths"],
+              "query": [
+                {
+                  "key": "industry",
+                  "value": "Technology"
+                },
+                {
+                  "key": "sort",
+                  "value": "popular"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Career Path Detail",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/career-paths/web-developer",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "career-paths", "web-developer"]
+            }
+          }
+        },
+        {
+          "name": "Get Industries List",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/career-paths/industries/list",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "career-paths", "industries", "list"]
+            }
+          }
+        },
+        {
+          "name": "Get Career Paths by Industry",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/career-paths/industry/Technology",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "career-paths", "industry", "Technology"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Applications",
+      "item": [
+        {
+          "name": "Get My Applications",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/applications?status=pending&sort=latest",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "applications"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "pending"
+                },
+                {
+                  "key": "sort",
+                  "value": "latest"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Application Detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/applications/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "applications", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Application Status (Company)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\": \"interview\",\n    \"notes\": \"Silakan hadir interview pada tanggal 25 Maret 2024 pukul 10.00 WIB\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/applications/1/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "applications", "1", "status"]
+            }
+          }
+        },
+        {
+          "name": "Download CV",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/applications/1/download",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "applications", "1", "download"]
+            }
+          }
+        },
+        {
+          "name": "Withdraw Application",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/applications/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "applications", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "Get Dashboard Data",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/dashboard",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "dashboard"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
